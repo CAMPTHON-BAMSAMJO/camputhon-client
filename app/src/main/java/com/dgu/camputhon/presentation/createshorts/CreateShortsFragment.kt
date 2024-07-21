@@ -11,6 +11,7 @@ import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Compani
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.THURS
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.TUES
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.WED
+import com.dgu.camputhon.presentation.createshorts.activity.SelectActivityBottomSheet
 import com.dgu.camputhon.presentation.createshorts.location.SelectLocationBottomSheet
 import com.dgu.camputhon.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,7 @@ class CreateShortsFragment :
 
         selectDay()
         selectLocation()
+        selectActivity()
         clickCreateShortsBtn()
     }
 
@@ -51,6 +53,12 @@ class CreateShortsFragment :
     private fun selectLocation() {
         binding.tvCreateShortsLocationInput.setOnClickListener {
             SelectLocationBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
+        }
+    }
+
+    private fun selectActivity() {
+        binding.tvCreateShortsActivityInput.setOnClickListener {
+            SelectActivityBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
         }
     }
 
