@@ -2,11 +2,15 @@ package com.dgu.camputhon.presentation
 
 import android.os.Bundle
 import android.view.MotionEvent
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.ActivityMainBinding
+import com.dgu.camputhon.presentation.MainViewModel.Companion.VIEW_LOADING
+import com.dgu.camputhon.presentation.MainViewModel.Companion.VIEW_RESULT
 import com.dgu.camputhon.presentation.home.HomeFragment
 import com.dgu.camputhon.presentation.createshorts.CreateShortsFragment
+import com.dgu.camputhon.presentation.createshorts.CreateShortsLoadingFragment
 import com.dgu.camputhon.presentation.store.StoreFragment
 import com.dgu.camputhon.util.base.BaseActivity
 import com.dgu.camputhon.util.hideKeyboard
@@ -15,12 +19,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initFragment()
         initBottomNavigation()
         setBottomNavigationClickListener()
+
+        changePage()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -57,5 +65,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initBottomNavigation() {
         binding.bnvMain.selectedItemId = R.id.bottom_navigation_home
         binding.bnvMain.itemIconTintList = null
+    }
+
+    private fun changePage() {
+        viewModel.currentView.observe(this) {
+            when (it) {
+                VIEW_LOADING -> changeFragment(CreateShortsLoadingFragment())
+                VIEW_RESULT -> changeFragment(ShortsResultFragment())
+            }
+        }
     }
 }

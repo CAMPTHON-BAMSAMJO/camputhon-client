@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.FragmentCreateShortsBinding
+import com.dgu.camputhon.presentation.MainViewModel
+import com.dgu.camputhon.presentation.MainViewModel.Companion.VIEW_LOADING
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.BOTTOM_SHEET
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.FRI
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.MON
@@ -28,6 +30,7 @@ class CreateShortsFragment :
     BaseFragment<FragmentCreateShortsBinding>(R.layout.fragment_create_shorts), AlertPickerDialogInterface {
 
     private val viewModel by activityViewModels<CreateShortsViewModel>()
+    private val mainViewModel by activityViewModels<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -137,7 +140,8 @@ class CreateShortsFragment :
 
     private fun clickCreateShortsBtn() {
         binding.btnCreateShorts.setOnClickListener {
-            viewModel.createShorts(viewModel.contents.value ?: "")
+//            viewModel.createShorts(viewModel.contents.value ?: "")
+            mainViewModel.setCurrentView(VIEW_LOADING)
         }
     }
 }
