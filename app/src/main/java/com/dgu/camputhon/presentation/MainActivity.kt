@@ -1,13 +1,15 @@
 package com.dgu.camputhon.presentation
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.fragment.app.Fragment
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.ActivityMainBinding
 import com.dgu.camputhon.presentation.home.HomeFragment
-import com.dgu.camputhon.presentation.plus.PlusFragment
+import com.dgu.camputhon.presentation.createshorts.CreateShortsFragment
 import com.dgu.camputhon.presentation.store.StoreFragment
 import com.dgu.camputhon.util.base.BaseActivity
+import com.dgu.camputhon.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,10 +23,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setBottomNavigationClickListener()
     }
 
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        hideKeyboard(currentFocus)
+        return super.dispatchTouchEvent(ev)
+    }
+
     private fun setBottomNavigationClickListener() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_navigation_plus -> changeFragment(PlusFragment())
+                R.id.bottom_navigation_plus -> changeFragment(CreateShortsFragment())
                 R.id.bottom_navigation_home -> changeFragment(HomeFragment())
                 R.id.bottom_navigation_store -> changeFragment(StoreFragment())
                 else -> true

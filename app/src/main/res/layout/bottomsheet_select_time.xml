@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_gray3_fill_top_5_rect"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <NumberPicker
+                android:id="@+id/picker_time_ampm"
+                android:theme="@style/AppTheme.NumberPicker2"
+                android:layout_width="0dp"
+                android:layout_height="185dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="58dp"
+                android:layout_marginBottom="39dp"
+                android:selectionDividerHeight="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/picker_time_hour"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <NumberPicker
+                android:id="@+id/picker_time_hour"
+                android:theme="@style/AppTheme.NumberPicker"
+                android:layout_width="97dp"
+                android:layout_height="190dp"
+                android:selectionDividerHeight="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/picker_time_ampm"
+                app:layout_constraintEnd_toStartOf="@id/picker_time_divider"
+                app:layout_constraintStart_toEndOf="@id/picker_time_ampm"
+                app:layout_constraintTop_toTopOf="@id/picker_time_ampm" />
+
+            <TextView
+                android:id="@+id/picker_time_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/gray4"
+                style="@style/TextAppearance.Camputhon.Title.Semibold.30"
+                app:layout_constraintStart_toEndOf="@id/picker_time_hour"
+                app:layout_constraintEnd_toStartOf="@id/picker_time_minute"
+                app:layout_constraintTop_toTopOf="@id/picker_time_hour"
+                app:layout_constraintBottom_toBottomOf="@id/picker_time_hour"/>
+
+            <NumberPicker
+                android:id="@+id/picker_time_minute"
+                android:layout_width="0dp"
+                android:layout_height="185dp"
+                android:theme="@style/AppTheme.NumberPicker"
+                android:selectionDividerHeight="0dp"
+                android:layout_marginEnd="59dp"
+                app:layout_constraintStart_toEndOf="@id/picker_time_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/picker_time_ampm"
+                app:layout_constraintBottom_toBottomOf="@id/picker_time_ampm"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_select_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="입력하기"
+                android:textColor="@color/white"
+                style="@style/TextAppearance.Camputhon.Body.Semibold.15"
+                android:paddingVertical="15dp"
+                android:layout_marginHorizontal="31dp"
+                android:background="@drawable/shape_main_brown_fill_5_rect"
+                android:outlineProvider="none"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

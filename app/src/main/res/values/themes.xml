@@ -16,4 +16,34 @@
         <item name="android:itemBackground">@android:color/transparent</item>
         <item name="android:colorControlHighlight">@android:color/transparent</item>
     </style>
+
+    <style name="TimePickerStyle" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
+<!--    <style name="NumberPickerStyle" parent="android:Widget.Material.NumberPicker">-->
+<!--&lt;!&ndash;        <item name="colorControlNormal">@color/app_gradient_end</item>&ndash;&gt;-->
+<!--        <item name="dividerColor">@android:color/transparent</item>-->
+<!--        <item name="android:textAppearance">@style/TextAppearance.Camputhon.Title.Semibold.24</item>-->
+<!--        <item name="android:textColor">@color/gray4</item>-->
+<!--        <item name="tabSelectedTextColor">@color/main_brown</item>-->
+<!--        <item name="background">@android:color/transparent</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme.NumberPicker" parent="">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textColorHighlight">@color/gray4</item>
+        <item name="android:textColorPrimary">@color/main_brown</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.NumberPicker2" parent="">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textColorHighlight">@color/gray4</item>
+        <item name="android:textColorPrimary">@color/main_brown</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

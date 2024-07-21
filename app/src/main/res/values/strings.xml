@@ -3,4 +3,11 @@
 
     <string name="onboarding_choose_men">MALE</string>
     <string name="onboarding_choose_women">FEMALE</string>
+    
+    <string name="create_day_mon">월</string>
+    <string name="create_day_tues">화</string>
+    <string name="create_day_wed">수</string>
+    <string name="create_day_thurs">목</string>
+    <string name="create_day_fri">금</string>
+    <string name="create_shorts_empty">빈칸을 클릭하세요</string>
 </resources>
