@@ -57,6 +57,14 @@ class CreateShortsViewModel: ViewModel() {
     val selectedDay: LiveData<String>
         get() = _selectedDay
 
+    private val _selectedStartTime = MutableLiveData<String>()
+    val selectedStartTime: LiveData<String>
+        get() = _selectedStartTime
+
+    private val _selectedEndTime = MutableLiveData<String>()
+    val selectedEndTime: LiveData<String>
+        get() = _selectedEndTime
+
     private val _selectedLocation = MutableLiveData<String>()
     val selectedLocation: LiveData<String>
         get() = _selectedLocation
@@ -70,6 +78,30 @@ class CreateShortsViewModel: ViewModel() {
     fun getSelectedDay(day: String) {
         _selectedDay.value = day
         Timber.d("[숏폼 생성] 제작: 요일 -> $day")
+    }
+
+    fun setSelectedStartTime(time: String) {
+        Timber.d("[숏폼 생성] 제작 시작시간 바텀시트 테스트 -> $time")
+        _selectedStartTime.value = time
+    }
+
+    fun countTime(ampm: Int, hour: Int, minute: Int): String {
+        var resultTime = ""
+        var newMinute = String.format("%02d", minute)
+
+        if (ampm == 1) {
+            resultTime = "${hour+12}:$newMinute"
+        } else {
+            var newHour = String.format("%02d", hour)
+            resultTime = "$newHour:$newMinute"
+        }
+
+        return resultTime
+    }
+
+    fun setSelectedEndTime(time: String) {
+        Timber.d("[숏폼 생성] 제작 종료시간 바텀시트 테스트 -> $time")
+        _selectedEndTime.value = time
     }
 
     fun setSelectedLocation(location: String) {

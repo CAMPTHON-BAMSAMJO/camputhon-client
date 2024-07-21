@@ -30,10 +30,20 @@
 <!--        <item name="background">@android:color/transparent</item>-->
 <!--    </style>-->
 
-    <style name="NumberPickerStyle" parent="Base.Theme.Camputhon">
+    <style name="AppTheme.NumberPicker" parent="">
         <item name="colorControlNormal">@android:color/transparent</item>
-        <item name="android:textColorHighlight">@color/main_brown</item>
-        <item name="android:textColorPrimary">@color/gray4</item>
+        <item name="android:textColorHighlight">@color/gray4</item>
+        <item name="android:textColorPrimary">@color/main_brown</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.NumberPicker2" parent="">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textColorHighlight">@color/gray4</item>
+        <item name="android:textColorPrimary">@color/main_brown</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

@@ -2,6 +2,7 @@ package com.dgu.camputhon.presentation.createshorts
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.FragmentCreateShortsBinding
@@ -56,25 +57,36 @@ class CreateShortsFragment :
         }
     }
 
-    override fun onClickDoneBtn(meridiem: Int, hour: Int, minute: Int) {
+    override fun onClickDoneBtn(id: Int, meridiem: Int, hour: Int, minute: Int) {
         val ampm = if(meridiem == 0) "오전" else "오후"
 
-        Timber.d("[숏폼 생성] 시간 입력 테스트 -> $ampm $hour : $minute")
+        Timber.d("[숏폼 생성] 시간 입력 테스트 -> id: $id // $ampm $hour : $minute")
+
+        if (id == 0) {
+            binding.tvCreateShortsStartTime.text = "$ampm $hour : $minute"
+            binding.tvCreateShortsStartTime.setTextAppearance(R.style.TextAppearance_Camputhon_Body_Medium_15)
+            binding.tvCreateShortsStartTime.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+
+            viewModel.setSelectedStartTime(viewModel.countTime(meridiem, hour, minute))
+        } else {
+            binding.tvCreateShortsEndTime.text = "$ampm $hour : $minute"
+            binding.tvCreateShortsEndTime.setTextAppearance(R.style.TextAppearance_Camputhon_Body_Medium_15)
+            binding.tvCreateShortsEndTime.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+
+            viewModel.setSelectedEndTime(viewModel.countTime(meridiem, hour, minute))
+        }
     }
 
     private fun selectStartTime() {
-//        var planMeridiem: Int = 0
-//        var planHour: Int = 9
-//        var planMinute: Int = 0
 
         binding.tvCreateShortsStartTime.setOnClickListener {
-            SelectTimeBottomSheet(this@CreateShortsFragment, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
+            SelectTimeBottomSheet(this@CreateShortsFragment, 0, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
         }
     }
 
     private fun selectEndTime() {
         binding.tvCreateShortsEndTime.setOnClickListener {
-            SelectTimeBottomSheet(this@CreateShortsFragment, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
+            SelectTimeBottomSheet(this@CreateShortsFragment, 1, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
         }
     }
 

@@ -12,11 +12,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 interface AlertPickerDialogInterface {
-    fun onClickDoneBtn(meridiem: Int, hour: Int, minute: Int)
+    fun onClickDoneBtn(id: Int, meridiem: Int, hour: Int, minute: Int)
 }
 
 class SelectTimeBottomSheet(
     pickerDialogInterface: AlertPickerDialogInterface,
+    id: Int,
     meridiem: Int, hour: Int, minute: Int
 ) : BottomSheetDialogFragment() {
 
@@ -31,6 +32,7 @@ class SelectTimeBottomSheet(
     private val minutesArr = Array(60) { (it).toString() }
 
     private var pickerDialogInterface: AlertPickerDialogInterface? = null
+    private var id: Int? = null
 
     // 선택된 값
     private var meridiem: Int? = null
@@ -38,6 +40,7 @@ class SelectTimeBottomSheet(
     private var minute: Int? = null
 
     init {
+        this.id = id
         this.meridiem = meridiem
         this.hour = hour
         this.minute = minute
@@ -68,7 +71,7 @@ class SelectTimeBottomSheet(
             hour = hoursPicker.value
             minute = minutePicker.value
 
-            this.pickerDialogInterface?.onClickDoneBtn(meridiem ?: 0, hour ?: 0, minute ?: 0)
+            this.pickerDialogInterface?.onClickDoneBtn( id ?: 0, meridiem ?: 0, hour ?: 0, minute ?: 0)
             dismiss()
         }
 
