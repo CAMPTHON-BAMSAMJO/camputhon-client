@@ -9,6 +9,7 @@ import com.dgu.camputhon.presentation.OnboardingViewModel.Companion.SEX_WOMEN
 import com.dgu.camputhon.util.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.util.UUID
 
 @AndroidEntryPoint
 class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
@@ -19,8 +20,22 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
+        viewModel.getStoredUserUUID()
+
+        initCheckIsAppFirst()
         clickChooseSexBtn()
         chooseSex()
+    }
+
+    private fun initCheckIsAppFirst() {
+        viewModel.storedUserUUID.observe(this) { storedUserUUID ->
+            Timber.d("[온보딩] uuid 저장 -> ${viewModel.storedUserUUID.value}")
+            if (storedUserUUID.isNullOrBlank()) {
+                val uuid = UUID.randomUUID().toString()
+                Timber.d("[온보딩] 처음 uuid -> $uuid")
+                viewModel.setStoredUserUUID(uuid)
+            }
+        }
     }
 
     private fun clickChooseSexBtn() {
@@ -35,10 +50,6 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
         }
         binding.tvOnboardingSexWomen.setOnClickListener {
             viewModel.chooseSex(SEX_WOMEN)
-        }
-
-        viewModel.chooseSex.observe(this) {
-            Timber.d("클릭 성별 -> $it")
         }
     }
 }
