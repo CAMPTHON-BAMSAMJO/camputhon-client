@@ -1,5 +1,6 @@
 package com.dgu.camputhon.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.dgu.camputhon.R
@@ -25,6 +26,7 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
         initCheckIsAppFirst()
         clickChooseSexBtn()
         chooseSex()
+        clickStartBtn()
     }
 
     private fun initCheckIsAppFirst() {
@@ -50,6 +52,15 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
         }
         binding.tvOnboardingSexWomen.setOnClickListener {
             viewModel.chooseSex(SEX_WOMEN)
+        }
+    }
+
+    private fun clickStartBtn() {
+        binding.btnOnboardingChooseStart.setOnClickListener {
+            // TODO uuid 전송 서버통신
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

@@ -102,6 +102,7 @@
             android:textColor="@color/black"
             style="@style/TextAppearance.Camputhon.Body.Semibold.15"
             android:visibility="@{viewModel.chooseSexView ? View.VISIBLE : View.GONE}"
+            android:enabled="@{!viewModel.chooseSex.isBlank()}"
             android:paddingVertical="15dp"
             android:layout_marginBottom="49dp"
             android:layout_marginHorizontal="31dp"
