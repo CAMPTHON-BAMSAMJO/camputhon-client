@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Camputhon</string>
 
-    <string name="onboarding_choose_men">MALE</string>
-    <string name="onboarding_choose_women">FEMALE</string>
+    <string name="onboarding_choose_men">남</string>
+    <string name="onboarding_choose_women">여</string>
     
     <string name="create_day_mon">월</string>
     <string name="create_day_tues">화</string>

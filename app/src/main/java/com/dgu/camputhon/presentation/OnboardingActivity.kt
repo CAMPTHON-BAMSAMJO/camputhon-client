@@ -57,10 +57,15 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
 
     private fun clickStartBtn() {
         binding.btnOnboardingChooseStart.setOnClickListener {
-            // TODO uuid 전송 서버통신
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            viewModel.postCreateUser()
+
+            viewModel.createUserSuccess.observe(this) {
+                if (it) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
     }
 }
