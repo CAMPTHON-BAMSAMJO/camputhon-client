@@ -11,9 +11,16 @@ class CreateShortsViewModel: ViewModel() {
     val selectedDay: LiveData<String>
         get() = _selectedDay
 
+    val contents = MutableLiveData<String>()
+
     fun getSelectedDay(day: String) {
         _selectedDay.value = day
         Timber.d("[숏폼 생성] 제작: 요일 -> $day")
+    }
+
+    fun createShorts(contents: String) {
+        // TODO 영상 생성하기 서버통신
+        Timber.d("[숏폼 생성] 제작: 일기 -> $contents")
     }
 
     companion object {

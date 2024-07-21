@@ -24,6 +24,7 @@ class CreateShortsFragment :
         binding.viewModel = viewModel
 
         selectDay()
+        clickCreateShortsBtn()
     }
 
     private fun selectDay() {
@@ -41,6 +42,12 @@ class CreateShortsFragment :
         }
         binding.tvCreateDayFri.setOnClickListener {
             viewModel.getSelectedDay(FRI)
+        }
+    }
+
+    private fun clickCreateShortsBtn() {
+        binding.btnCreateShorts.setOnClickListener {
+            viewModel.createShorts(viewModel.contents.value ?: "")
         }
     }
 }

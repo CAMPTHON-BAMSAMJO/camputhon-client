@@ -6,4 +6,7 @@
     
     <color name="main_brown">#7F553A</color>
     <color name="brown_bright">#D0B8A8</color>
+
+    <color name="gray">#C2C3C5</color>
+    <color name="gray2">#CBCED5</color>
 </resources>
