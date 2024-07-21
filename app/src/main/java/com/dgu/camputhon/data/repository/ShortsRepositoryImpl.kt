@@ -4,6 +4,7 @@ import com.dgu.camputhon.data.datasource.ShortsDataSource
 import com.dgu.camputhon.data.model.request.CreateUserRequestDto
 import com.dgu.camputhon.data.model.request.PostShortsRequestDto
 import com.dgu.camputhon.domain.entity.ShortsUrl
+import com.dgu.camputhon.domain.entity.StoredShortsItem
 import com.dgu.camputhon.domain.repository.ShortsRepository
 import com.dgu.camputhon.domain.repository.UserIdRepository
 import javax.inject.Inject
@@ -38,5 +39,9 @@ class ShortsRepositoryImpl @Inject constructor(
             userId,
             PostShortsRequestDto(day, startTime, endTime, activity, location, content)
         ).toShortsUrl()
+    }
+
+    override suspend fun getShorts(userId: Int): Result<List<StoredShortsItem>> = runCatching {
+        shortsDataSource.getShorts(userId).toMapShortsItem()
     }
 }

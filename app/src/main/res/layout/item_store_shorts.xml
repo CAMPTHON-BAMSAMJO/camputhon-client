@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_shorts"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:cardCornerRadius="100dp"
+        app:cardBackgroundColor="@color/gray"
+        android:outlineProvider="none"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:background="@drawable/ic_type_1"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_short_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="별빛 속 깊은 사색의 숏다리"
+        android:layout_marginStart="7dp"
+        style="@style/TextAppearance.Camputhon.Body.Bold.13"
+        app:layout_constraintTop_toTopOf="@id/cv_shorts"
+        app:layout_constraintBottom_toBottomOf="@id/cv_shorts"
+        app:layout_constraintStart_toEndOf="@id/cv_shorts"/>
+
+    <ImageView
+        android:id="@+id/iv_short_share"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:src="@drawable/ic_share"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="31dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_shorts_url"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="31dp"
+        android:background="@color/gray4"
+        app:layout_constraintDimensionRatio="3:4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_shorts"/>
+
+    <TextView
+        android:id="@+id/tv_shorts_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장소: "
+        android:textColor="@color/main_brown"
+        style="@style/TextAppearance.Camputhon.Body.Bold.15"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="47dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_shorts_url"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_shorts_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="활동: "
+        android:textColor="@color/main_brown"
+        style="@style/TextAppearance.Camputhon.Body.Bold.15"
+        app:layout_constraintTop_toBottomOf="@id/tv_shorts_location"
+        app:layout_constraintStart_toStartOf="@id/tv_shorts_location"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
