@@ -116,7 +116,7 @@ class CreateShortsViewModel: ViewModel() {
 
     fun createShorts(contents: String) {
         // TODO 영상 생성하기 서버통신
-        Timber.d("[숏폼 생성] 제작 테스트 -> 장소: ${selectedLocation.value} // 활동: ${selectedActivity.value} //  일기: $contents")
+        Timber.d("[숏폼 생성] 제작 테스트 -> 요일: ${selectedDay.value} // 시간: ${selectedStartTime.value} - ${selectedEndTime.value} // 장소: ${selectedLocation.value} // 활동: ${selectedActivity.value} //  일기: $contents")
     }
 
     companion object {

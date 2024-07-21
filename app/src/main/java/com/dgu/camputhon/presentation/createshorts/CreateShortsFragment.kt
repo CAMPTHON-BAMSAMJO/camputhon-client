@@ -1,8 +1,10 @@
 package com.dgu.camputhon.presentation.createshorts
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.FragmentCreateShortsBinding
@@ -25,18 +27,24 @@ import kotlin.math.min
 class CreateShortsFragment :
     BaseFragment<FragmentCreateShortsBinding>(R.layout.fragment_create_shorts), AlertPickerDialogInterface {
 
-    private val viewModel by viewModels<CreateShortsViewModel>()
+    private val viewModel by activityViewModels<CreateShortsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
+        initSet()
         selectDay()
         selectStartTime()
         selectEndTime()
         selectLocation()
         selectActivity()
         clickCreateShortsBtn()
+    }
+
+    private fun initSet() {
+        setLocation()
+        setActivity()
     }
 
     private fun selectDay() {
@@ -94,11 +102,36 @@ class CreateShortsFragment :
         binding.tvCreateShortsLocationInput.setOnClickListener {
             SelectLocationBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
         }
+
+    }
+
+    private fun setLocation() {
+        viewModel.selectedLocation.observe(viewLifecycleOwner) {
+            with(binding.tvCreateShortsLocationInput) {
+                setTextAppearance(R.style.TextAppearance_Camputhon_Body_Medium_15)
+                text = it
+                setTextColor(Color.BLACK)
+            }
+        }
     }
 
     private fun selectActivity() {
         binding.tvCreateShortsActivityInput.setOnClickListener {
             SelectActivityBottomSheet().show(parentFragmentManager, BOTTOM_SHEET)
+        }
+    }
+
+    private fun setActivity() {
+        viewModel.selectedActivity.observe(viewLifecycleOwner) {
+//            if (!it.isNullOrBlank()) {
+//                binding.tvCreateShortsActivityInput.setTextAppearance(R.style.TextAppearance_Camputhon_Body_Medium_15)
+//            }
+            Timber.d("[테스트] 활동 -> $it")
+            with(binding.tvCreateShortsActivityInput) {
+                setTextAppearance(R.style.TextAppearance_Camputhon_Body_Medium_15)
+                text = it
+                setTextColor(Color.BLACK)
+            }
         }
     }
 

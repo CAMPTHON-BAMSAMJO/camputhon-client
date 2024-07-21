@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import com.dgu.camputhon.databinding.BottomsheetSelectLocationBinding
 import com.dgu.camputhon.domain.entity.SelectLocation
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SelectLocationBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel by activityViewModels<CreateShortsViewModel>()
@@ -23,6 +26,8 @@ class SelectLocationBottomSheet : BottomSheetDialogFragment() {
     private var _selectLocationAdapter: SelectLocationAdapter? = null
     private val selectLocationAdapter
         get() = requireNotNull(_selectLocationAdapter)
+
+//    private val selectedLocation = MutableLiveData<String>("")
 
     override fun onStart() {
         super.onStart()
@@ -47,6 +52,7 @@ class SelectLocationBottomSheet : BottomSheetDialogFragment() {
 
         initSetAdapter()
         initSetLocationList()
+        clickConfirmBtn()
     }
 
     private fun initSetAdapter() {
@@ -54,6 +60,7 @@ class SelectLocationBottomSheet : BottomSheetDialogFragment() {
             setOnItemClickListener(object : SelectLocationAdapter.OnItemClickListener {
                 override fun onItemClick(item: SelectLocation, position: Int) {
 //                    Timber.d("[숏폼 생성] 제작 장소 바텀시트 -> ${item.location}")
+//                    selectedLocation.value = item.location
                     viewModel.setSelectedLocation(item.location)
                 }
             })
@@ -68,7 +75,17 @@ class SelectLocationBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun clickConfirmBtn() {
-        // TODO 장소 입력 버튼 구현
+//        binding.btnSelectLocation.setOnClickListener {
+//            viewModel.setSelectedLocation(selectedLocation.value ?: "")
+//            dismiss()
+//        }
+
+        viewModel.selectedLocation.observe(viewLifecycleOwner) {
+            binding.btnSelectLocation.visibility = View.VISIBLE
+            binding.btnSelectLocation.setOnClickListener {
+                dismiss()
+            }
+        }
     }
 
 }

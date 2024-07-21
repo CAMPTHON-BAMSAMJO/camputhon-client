@@ -9,4 +9,5 @@
     <string name="create_day_wed">수</string>
     <string name="create_day_thurs">목</string>
     <string name="create_day_fri">금</string>
+    <string name="create_shorts_empty">빈칸을 클릭하세요</string>
 </resources>

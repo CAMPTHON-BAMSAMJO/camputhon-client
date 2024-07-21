@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import com.dgu.camputhon.databinding.BottomsheetSelectActivityBinding
 import com.dgu.camputhon.databinding.BottomsheetSelectLocationBinding
 import com.dgu.camputhon.domain.entity.SelectActivity
@@ -13,7 +14,10 @@ import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel
 import com.dgu.camputhon.presentation.createshorts.location.SelectLocationAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class SelectActivityBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel by activityViewModels<CreateShortsViewModel>()
@@ -25,6 +29,8 @@ class SelectActivityBottomSheet : BottomSheetDialogFragment() {
     private var _selectActivityAdapter: SelectActivityAdapter? = null
     private val selectActivityAdapter
         get() = requireNotNull(_selectActivityAdapter)
+
+//    private val selectedActivity = MutableLiveData<String>("")
 
     override fun onStart() {
         super.onStart()
@@ -49,12 +55,14 @@ class SelectActivityBottomSheet : BottomSheetDialogFragment() {
 
         initSetAdapter()
         initSetLocationList()
+        clickConfirmBtn()
     }
 
     private fun initSetAdapter() {
         _selectActivityAdapter = SelectActivityAdapter(requireContext()).apply {
             setOnItemClickListener(object : SelectActivityAdapter.OnItemClickListener {
                 override fun onItemClick(item: SelectActivity, position: Int) {
+//                    selectedActivity.value = item.activity
                     viewModel.setSelectedActivity(item.activity)
                 }
             })
@@ -69,6 +77,15 @@ class SelectActivityBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun clickConfirmBtn() {
-        // TODO 장소 입력 버튼 구현
+//        binding.btnSelectActivity.setOnClickListener {
+//            viewModel.setSelectedActivity(selectedActivity.value ?: "")
+//            dismiss()
+//        }
+        viewModel.selectedActivity.observe(viewLifecycleOwner) {
+            binding.btnSelectActivity.visibility = View.VISIBLE
+            binding.btnSelectActivity.setOnClickListener {
+                dismiss()
+            }
+        }
     }
 }

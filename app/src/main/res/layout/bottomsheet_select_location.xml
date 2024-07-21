@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel" />
@@ -37,6 +38,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/item_select_location"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_select_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="입력하기"
+                android:textColor="@color/white"
+                android:outlineProvider="none"
+                android:background="@drawable/shape_main_brown_fill_5_rect"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="31dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

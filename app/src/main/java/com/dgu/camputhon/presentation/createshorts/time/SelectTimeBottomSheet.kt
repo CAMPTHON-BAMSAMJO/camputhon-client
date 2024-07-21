@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.activityViewModels
 import com.dgu.camputhon.databinding.BottomsheetSelectTimeBinding
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel
@@ -74,6 +75,10 @@ class SelectTimeBottomSheet(
             this.pickerDialogInterface?.onClickDoneBtn( id ?: 0, meridiem ?: 0, hour ?: 0, minute ?: 0)
             dismiss()
         }
+
+        ampmPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        hoursPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        minutePicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         //  최소값 설정
         ampmPicker.minValue = 0
