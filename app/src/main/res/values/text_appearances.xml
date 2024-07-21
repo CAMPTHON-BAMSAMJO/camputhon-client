@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Camputhon" parent="">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Title -->
+    <style name="TextAppearance.Camputhon.Title.Regular.32" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">32dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Bold.32" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">32dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Bold.20" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">20dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Semibold.24" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">24dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Semibold.40" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">40dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Semibold.20" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">20dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Extrabold.24" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">24dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_extrabold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Extrabold.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_extrabold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Extrabold.32" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">32dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_extrabold</item>
+    </style>
+
+    <!-- Body -->
+    <style name="TextAppearance.Camputhon.Body.Light.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_light</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Regular.20" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">20dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Medium.20" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">20dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Medium.12" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">12dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Semibold.12" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">12dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Regular.12" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">12dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Regular.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Medium.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Semibold.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Body.Bold.15" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <!-- Safety Percentage -->
+    <style name="TextAppearance.Camputhon.SafetyPercentage.Bold.12" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">12dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.SafetyPercentage.Light.24" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">24dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_light</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.SafetyPercentage.Semibold.24" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">24dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.SafetyPercentage.Light.40" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">40dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_light</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.SafetyPercentage.Light.64" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">64dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_light</item>
+    </style>
+</resources>
