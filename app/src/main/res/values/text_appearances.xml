@@ -36,8 +36,20 @@
         <item name="android:fontFamily">@font/pretendard_semibold</item>
     </style>
 
+    <style name="TextAppearance.Camputhon.Title.Semibold.30" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">30dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
     <style name="TextAppearance.Camputhon.Title.Semibold.20" parent="TextAppearance.Camputhon">
         <item name="android:textSize">20dp</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="TextAppearance.Camputhon.Title.Semibold.22" parent="TextAppearance.Camputhon">
+        <item name="android:textSize">22dp</item>
         <item name="android:lineSpacingMultiplier">1.5</item>
         <item name="android:fontFamily">@font/pretendard_semibold</item>
     </style>

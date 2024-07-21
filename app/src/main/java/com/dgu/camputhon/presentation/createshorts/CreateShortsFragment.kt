@@ -13,12 +13,16 @@ import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Compani
 import com.dgu.camputhon.presentation.createshorts.CreateShortsViewModel.Companion.WED
 import com.dgu.camputhon.presentation.createshorts.activity.SelectActivityBottomSheet
 import com.dgu.camputhon.presentation.createshorts.location.SelectLocationBottomSheet
+import com.dgu.camputhon.presentation.createshorts.time.AlertPickerDialogInterface
+import com.dgu.camputhon.presentation.createshorts.time.SelectTimeBottomSheet
 import com.dgu.camputhon.util.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import kotlin.math.min
 
 @AndroidEntryPoint
 class CreateShortsFragment :
-    BaseFragment<FragmentCreateShortsBinding>(R.layout.fragment_create_shorts) {
+    BaseFragment<FragmentCreateShortsBinding>(R.layout.fragment_create_shorts), AlertPickerDialogInterface {
 
     private val viewModel by viewModels<CreateShortsViewModel>()
 
@@ -27,6 +31,8 @@ class CreateShortsFragment :
         binding.viewModel = viewModel
 
         selectDay()
+        selectStartTime()
+        selectEndTime()
         selectLocation()
         selectActivity()
         clickCreateShortsBtn()
@@ -47,6 +53,28 @@ class CreateShortsFragment :
         }
         binding.tvCreateDayFri.setOnClickListener {
             viewModel.getSelectedDay(FRI)
+        }
+    }
+
+    override fun onClickDoneBtn(meridiem: Int, hour: Int, minute: Int) {
+        val ampm = if(meridiem == 0) "오전" else "오후"
+
+        Timber.d("[숏폼 생성] 시간 입력 테스트 -> $ampm $hour : $minute")
+    }
+
+    private fun selectStartTime() {
+//        var planMeridiem: Int = 0
+//        var planHour: Int = 9
+//        var planMinute: Int = 0
+
+        binding.tvCreateShortsStartTime.setOnClickListener {
+            SelectTimeBottomSheet(this@CreateShortsFragment, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
+        }
+    }
+
+    private fun selectEndTime() {
+        binding.tvCreateShortsEndTime.setOnClickListener {
+            SelectTimeBottomSheet(this@CreateShortsFragment, 0, 9, 0).show(parentFragmentManager, BOTTOM_SHEET)
         }
     }
 
