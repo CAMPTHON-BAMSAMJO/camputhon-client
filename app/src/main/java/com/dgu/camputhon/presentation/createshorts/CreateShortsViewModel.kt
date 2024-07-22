@@ -3,11 +3,21 @@ package com.dgu.camputhon.presentation.createshorts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.dgu.camputhon.domain.entity.SelectActivity
 import com.dgu.camputhon.domain.entity.SelectLocation
+import com.dgu.camputhon.domain.usecase.GetUserIdUseCase
+import com.dgu.camputhon.domain.usecase.PostShortsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class CreateShortsViewModel: ViewModel() {
+@HiltViewModel
+class CreateShortsViewModel @Inject constructor(
+    private val postShortsUseCase: PostShortsUseCase,
+    private val getUserIdUseCase: GetUserIdUseCase
+) : ViewModel() {
 
     private val _locationList: MutableLiveData<ArrayList<SelectLocation>> =
         MutableLiveData(
@@ -32,13 +42,10 @@ class CreateShortsViewModel: ViewModel() {
     private val _activityList: MutableLiveData<ArrayList<SelectActivity>> =
         MutableLiveData(
             arrayListOf(
-                SelectActivity("수면"),
                 SelectActivity("과제"),
                 SelectActivity("운동"),
-                SelectActivity("명상"),
                 SelectActivity("밥"),
                 SelectActivity("수다"),
-                SelectActivity("데이트"),
                 SelectActivity("팀플"),
                 SelectActivity("독서"),
                 SelectActivity("영화관람"),
@@ -47,7 +54,7 @@ class CreateShortsViewModel: ViewModel() {
                 SelectActivity("연구"),
                 SelectActivity("산책"),
 
-            )
+                )
         )
 
     val activityList: LiveData<ArrayList<SelectActivity>>
@@ -75,6 +82,10 @@ class CreateShortsViewModel: ViewModel() {
 
     val contents = MutableLiveData<String>()
 
+    private val _createShortsUrl = MutableLiveData<String>()
+    val createShortsUrl: LiveData<String>
+        get() = _createShortsUrl
+
     fun getSelectedDay(day: String) {
         _selectedDay.value = day
         Timber.d("[숏폼 생성] 제작: 요일 -> $day")
@@ -90,7 +101,7 @@ class CreateShortsViewModel: ViewModel() {
         var newMinute = String.format("%02d", minute)
 
         if (ampm == 1) {
-            resultTime = "${hour+12}:$newMinute"
+            resultTime = "${hour + 12}:$newMinute"
         } else {
             var newHour = String.format("%02d", hour)
             resultTime = "$newHour:$newMinute"
@@ -115,16 +126,33 @@ class CreateShortsViewModel: ViewModel() {
     }
 
     fun createShorts(contents: String) {
-        // TODO 영상 생성하기 서버통신
         Timber.d("[숏폼 생성] 제작 테스트 -> 요일: ${selectedDay.value} // 시간: ${selectedStartTime.value} - ${selectedEndTime.value} // 장소: ${selectedLocation.value} // 활동: ${selectedActivity.value} //  일기: $contents")
+        viewModelScope.launch {
+            getUserIdUseCase().userId?.let { userId ->
+                postShortsUseCase(
+                    userId,
+                    selectedDay.value ?: "",
+                    selectedStartTime.value ?: "",
+                    selectedEndTime.value ?: "",
+                    selectedActivity.value ?: "",
+                    selectedLocation.value ?: "",
+                    contents
+                ).onSuccess {
+                    _createShortsUrl.value = it.shortsUrl
+                    Timber.d("[서버통신] 숏폼 생성 성공")
+                }.onFailure { error ->
+                    Timber.d("[서버통신] 숏폼 생성 실패 -> ${error.message}")
+                }
+            }
+        }
     }
 
     companion object {
-        const val MON = "월"
-        const val TUES = "화"
-        const val WED = "수"
-        const val THURS = "목"
-        const val FRI = "금"
+        const val MON = "월요일"
+        const val TUES = "화요일"
+        const val WED = "수요일"
+        const val THURS = "목요일"
+        const val FRI = "금요일"
 
         const val BOTTOM_SHEET = "BOTTOM_SHEET"
     }

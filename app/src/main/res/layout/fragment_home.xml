@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.dgu.camputhon.presentation.home.HomeViewModel" />
 
     </data>
 
@@ -11,14 +15,254 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/iv_home_logo"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_logo_long"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <TextView
+            android:id="@+id/tv_home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="홈"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/TextAppearance.Camputhon.Title.Extrabold.32"
+            android:textColor="@color/black"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_home_logo"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_home_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/ic_home_top"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_shorts"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="100dp"
+                android:background="@color/gray4"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="34dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_shorts_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_type_1"
+                    android:scaleType="centerInside"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공강 시간의 나는?"
+                android:textColor="@color/gray5"
+                style="@style/TextAppearance.Camputhon.Body.Semibold.15"
+                android:layout_marginStart="15dp"
+                app:layout_constraintTop_toTopOf="@id/cv_shorts"
+                app:layout_constraintStart_toEndOf="@id/cv_shorts"/>
+
+            <TextView
+                android:id="@+id/tv_home_type_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="노을과 함께 페이지를 넘기는"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="11dp"
+                style="@style/TextAppearance.Camputhon.Title.Bold.20"
+                android:textColor="@color/main_brown"
+                app:layout_constraintTop_toBottomOf="@id/tv_me"
+                app:layout_constraintStart_toStartOf="@id/tv_me"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="숏다리"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="11dp"
+                android:textColor="@color/main_brown"
+                style="@style/TextAppearance.Camputhon.Body.Semibold.15"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_type_text"
+                app:layout_constraintStart_toStartOf="@id/tv_me"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_advantage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray6"
+                style="@style/TextAppearance.Camputhon.Body.Semibold.15"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="28dp"
+                app:layout_constraintTop_toBottomOf="@id/cv_shorts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="책을 읽으며 자기계발에 힘쓰는 타입 새로운 지식을 습득하는 데 우수"/>
+
+            <TextView
+                android:id="@+id/semi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌟Recommend Activity"
+                style="@style/TextAppearance.Camputhon.Body.Regular.12"
+                android:textColor="@color/gray5"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="11dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_advantage"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_home_develop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray5"
+                style="@style/TextAppearance.Camputhon.Body.Bold.13"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toBottomOf="@id/semi_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="문학 모임이나 독서 클럽에 참여하여 인사이트를 공유하고 토론을 즐기는 건 어때요?"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_home_left"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/ic_home_bottom"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="31dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_top"
+            app:layout_constraintStart_toEndOf="@id/layout_home_right"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="101dp"
+                android:layout_height="101dp"
+                android:src="@drawable/ic_home_percentage_back"
+                android:layout_marginTop="14dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.homeData.mostActivity.activity}"
+                android:textColor="#404040"
+                style="@style/TextAppearance.Camputhon.Title.Bold.20"
+                android:layout_marginTop="68dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+<!--            <com.dgu.camputhon.presentation.home.CustomCircleBarView-->
+<!--                android:id="@+id/customCircleBarView_activity"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                app:layout_constraintWidth_default="percent"-->
+<!--                app:layout_constraintHeight_default="percent"-->
+<!--                app:layout_constraintWidth_percent="1.0"-->
+<!--                app:layout_constraintHeight_percent="1.0"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가장 많이 한 활동"
+            android:textColor="@color/gray5"
+            style="@style/TextAppearance.Camputhon.Body.Semibold.12"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="@id/layout_home_left"
+            app:layout_constraintEnd_toEndOf="@id/layout_home_left"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_left"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_home_right"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/ic_home_bottom"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="31dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_top"
+            app:layout_constraintStart_toEndOf="@id/layout_home_left"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="101dp"
+                android:layout_height="101dp"
+                android:src="@drawable/ic_home_percentage_back"
+                android:layout_marginTop="14dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.homeData.mostLocation.location}"
+                android:textColor="#404040"
+                style="@style/TextAppearance.Camputhon.Title.Bold.20"
+                android:layout_marginTop="68dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+<!--            <com.dgu.camputhon.presentation.home.CustomCircleBarView-->
+<!--                android:id="@+id/customCircleBarView_location"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                app:layout_constraintWidth_default="percent"-->
+<!--                app:layout_constraintHeight_default="percent"-->
+<!--                app:layout_constraintWidth_percent="1.0"-->
+<!--                app:layout_constraintHeight_percent="1.0"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가장 많이 간 장소"
+            android:textColor="@color/gray5"
+            style="@style/TextAppearance.Camputhon.Body.Semibold.12"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="@id/layout_home_right"
+            app:layout_constraintEnd_toEndOf="@id/layout_home_right"
+            app:layout_constraintTop_toBottomOf="@id/layout_home_right"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
