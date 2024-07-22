@@ -41,7 +41,7 @@ class StoreShortsAdapter(private val context: Context, private val activity: Act
 //            Glide.with(activity).load(Uri.parse(data.shortUrl)).into(binding.ivShortsUrl)
 
 
-            binding.ivShortsUrl.setVideoURI(Uri.parse("https://camputhon-resouce.s3.amazonaws.com/9.mp4"))
+            binding.ivShortsUrl.setVideoURI(Uri.parse("https://camputhon-resouce.s3.amazonaws.com/1.mp4"))
             binding.ivShortsUrl.setMediaController(MediaController(context))
             binding.ivShortsUrl.requestFocus()
             binding.ivShortsUrl.setOnPreparedListener { mp ->

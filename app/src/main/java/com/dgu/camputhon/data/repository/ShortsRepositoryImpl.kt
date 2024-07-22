@@ -3,6 +3,7 @@ package com.dgu.camputhon.data.repository
 import com.dgu.camputhon.data.datasource.ShortsDataSource
 import com.dgu.camputhon.data.model.request.CreateUserRequestDto
 import com.dgu.camputhon.data.model.request.PostShortsRequestDto
+import com.dgu.camputhon.domain.entity.HomeItem
 import com.dgu.camputhon.domain.entity.ShortsUrl
 import com.dgu.camputhon.domain.entity.StoredShortsItem
 import com.dgu.camputhon.domain.repository.ShortsRepository
@@ -43,5 +44,9 @@ class ShortsRepositoryImpl @Inject constructor(
 
     override suspend fun getShorts(userId: Int): Result<List<StoredShortsItem>> = runCatching {
         shortsDataSource.getShorts(userId).toMapShortsItem()
+    }
+
+    override suspend fun getHome(userId: Int): Result<HomeItem> = runCatching {
+        shortsDataSource.getHome(userId).toMapHomeItem()
     }
 }
