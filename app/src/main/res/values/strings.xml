@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Camputhon</string>
+    <string name="app_name">숏다리</string>
 
     <string name="onboarding_choose_men">남</string>
     <string name="onboarding_choose_women">여</string>
