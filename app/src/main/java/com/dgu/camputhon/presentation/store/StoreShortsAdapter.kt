@@ -2,20 +2,40 @@ package com.dgu.camputhon.presentation.store
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.SurfaceTexture
+import android.media.MediaPlayer
 import android.media.RouteListingPreference.Item
 import android.net.Uri
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.Surface
+import android.view.TextureView
+import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
+import android.widget.Toast
+import androidx.media3.datasource.DataSource
+import androidx.media3.datasource.DefaultDataSourceFactory
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.arthenica.mobileffmpeg.Config
+import com.arthenica.mobileffmpeg.FFmpeg
 import com.bumptech.glide.Glide
 import com.dgu.camputhon.R
 import com.dgu.camputhon.databinding.ItemSelectActivityBinding
 import com.dgu.camputhon.databinding.ItemStoreShortsBinding
 import com.dgu.camputhon.domain.entity.StoredShortsItem
+import com.dgu.camputhon.presentation.WebViewActivity
 import com.dgu.camputhon.presentation.createshorts.activity.SelectActivityAdapter
 import com.dgu.camputhon.util.ItemDiffCallback
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import timber.log.Timber
 
 class StoreShortsAdapter(private val context: Context, private val activity: Activity) : ListAdapter<StoredShortsItem, StoreShortsAdapter.StoredShortsViewHolder>(
     ItemDiffCallback<StoredShortsItem>(
@@ -27,30 +47,116 @@ class StoreShortsAdapter(private val context: Context, private val activity: Act
     inner class StoredShortsViewHolder(
         private val binding: ItemStoreShortsBinding
     ): RecyclerView.ViewHolder(binding.root) {
+
+
         fun onBind(data: StoredShortsItem) {
+
 
             matchShorType(binding, data.shortType)
 
-            val videoView = binding.ivShortsUrl
-//            var mediaController = MediaController(context)
-//            mediaController.setAnchorView(videoView)
-//            binding.ivShortsUrl.setMediaController(mediaController)
-//            binding.ivShortsUrl.setVideoURI(Uri.parse(data.shortUrl))
-//            binding.ivShortsUrl.start()
+//            var uri: Uri = Uri.parse(data.shortType)
 
-//            Glide.with(activity).load(Uri.parse(data.shortUrl)).into(binding.ivShortsUrl)
+//                val videoUri: Uri = Uri.parse("android.resource://${context.packageName}/${R.raw.testmp4}")
+//                val videoUri: Uri = Uri.parse(data.shortUrl)
+//                Timber.d("[동영상] format -> $videoUri")
+//
+//                videoView.setMediaController(MediaController(context))
+//                videoView.setVideoURI(videoUri)
+//                videoView.requestFocus()
+//
+//                videoView.setOnPreparedListener {
+////                    Toast.makeText(applicationContext, "동영상 재생 준비 완료", Toast.LENGTH_SHORT).show()
+//                    Timber.d("[동영상] 동영상 재생 준비 완료")
+//                    videoView.start()
+//                }
+//
+//                videoView.setOnCompletionListener {
+////                    Toast.makeText(applicationContext, "동영상 시청 완료", Toast.LENGTH_SHORT).show()
+//                    Timber.d("[동영상] 동영상 시청 완료")
+//                }
+//
+//                videoView.setOnErrorListener { mp, what, extra ->
+////                    Toast.makeText(applicationContext, "동영상 재생 중 오류 발생", Toast.LENGTH_SHORT).show()
+//                    Timber.d("[동영상] 동영상 재생 중 오류 발생")
+//                    true
+//                }
 
+                val videoUri: Uri = Uri.parse(data.shortUrl)
+                val outputPath = "${context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)}/converted_${data.id}.mp4"
 
-            binding.ivShortsUrl.setVideoURI(Uri.parse("https://camputhon-resouce.s3.amazonaws.com/1.mp4"))
-            binding.ivShortsUrl.setMediaController(MediaController(context))
-            binding.ivShortsUrl.requestFocus()
-            binding.ivShortsUrl.setOnPreparedListener { mp ->
-                mp.start()
-            }
+                convertAndPlayVideo(videoUri, outputPath)
+//            }
 
             binding.tvShortsLocation.text = "장소: ${data.location}"
             binding.tvShortsActivity.text = "활동: ${data.activity}"
         }
+
+        private fun convertAndPlayVideo(videoUri: Uri, outputPath: String) {
+            Thread {
+                try {
+                    // FFMPEG를 사용하여 비디오 변환
+                    val ffmpegCommand = arrayOf(
+                        "-i", videoUri.toString(),
+                        "-c:v", "mpeg4",
+                        "-c:a", "aac",
+                        "-strict", "experimental",
+                        "-y",
+                        outputPath
+                    )
+
+                    val rc = FFmpeg.execute(ffmpegCommand)
+                    val log = Config.getLastCommandOutput()
+
+                    activity.runOnUiThread {
+                        if (rc == 0) {
+//                            Toast.makeText(context, "동영상 변환 완료", Toast.LENGTH_SHORT).show()
+                            Timber.d("[동영상]] 동영상 변환 완료")
+                            setupVideoView(outputPath)
+                        } else {
+//                            Toast.makeText(context, "동영상 변환 실패", Toast.LENGTH_SHORT).show()
+                            Timber.d("[동영상]] 동영상 변환 실패 $log")
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    activity.runOnUiThread {
+//                        Toast.makeText(context, "동영상 변환 중 오류 발생", Toast.LENGTH_SHORT).show()
+                        Timber.d("[동영상]] 동영상 변환 중 오류 발생")
+                    }
+                }
+            }.start()
+        }
+
+        private fun setupVideoView(videoPath: String) {
+            with(binding) {
+                videoView.setMediaController(MediaController(context))
+                videoView.setVideoURI(Uri.parse(videoPath))
+                videoView.requestFocus()
+
+                Timber.d("[동영상]] format -> $videoPath")
+
+//                if (videoPath.isNotBlank()) binding.progressbar.visibility = View.GONE
+
+                videoView.setOnPreparedListener {
+//                    Toast.makeText(context, "동영상 재생 준비 완료", Toast.LENGTH_SHORT).show()
+                    binding.progressbar.visibility = View.GONE
+                    Timber.d("[동영상]] 동영상 재생 준비 완료")
+                    videoView.start()
+                }
+
+                videoView.setOnCompletionListener {
+//                    Toast.makeText(context, "동영상 시청 완료", Toast.LENGTH_SHORT).show()
+                    Timber.d("[동영상]] 동영상 시청 완료")
+                }
+
+                videoView.setOnErrorListener { mp, what, extra ->
+//                    Toast.makeText(context, "동영상 재생 중 오류 발생", Toast.LENGTH_SHORT).show()
+                    Timber.d("[동영상]] 동영상 재생 중 오류 발생")
+                    true
+                }
+            }
+        }
+
     }
 
     private fun matchShorType(binding: ItemStoreShortsBinding, shorType: String) {
